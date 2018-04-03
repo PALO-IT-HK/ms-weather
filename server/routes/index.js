@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
+const weatherController = require('../controllers/weatherController');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  return res.status(200).send({ status: 'OK' });
-});
+router.get('/', weatherController.renderIndex);
 
 module.exports = router;
