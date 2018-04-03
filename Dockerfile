@@ -5,7 +5,7 @@ FROM node
 WORKDIR /msweather
 
 # Copy package.json and index.js to msweather folder
-COPY package.json index.js /msweather/
+COPY package.json index.js .env /msweather/
 
 # Copy server folder
 COPY server /msweather/server

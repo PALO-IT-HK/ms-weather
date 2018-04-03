@@ -9,7 +9,7 @@ let weatherController = {
     return res.status(200).send({ status: 'OK' })
   },
   getFiveDaysWeather: (req, res, next) => {
-    const url = `${config.weather_api_url}forecast?q=London&${config.weather_api_KEY}`
+    const url = `${config.weather_api_url}forecast?q=London&${process.env.WEATHER_API_KEY}`
     fetch(url)
     .then(response => {
       response.json().then(json => {
@@ -26,7 +26,7 @@ let weatherController = {
   getFiveDaysWeatherViaLatLong: (req, res, next) => {
     const latitude = req.params.lat
     const longitude = req.params.lon
-    const url = `${config.weather_api_url}forecast?lat=${latitude}&lon=${longitude}&${config.weather_api_KEY}`
+    const url = `${config.weather_api_url}forecast?lat=${latitude}&lon=${longitude}&${process.env.WEATHER_API_KEY}`
     fetch(url)
     .then(response => {
       response.json().then(json => {
