@@ -4,5 +4,8 @@ module.exports = {
       list: json.list,
       city: json.city
     })
+  },
+  decodeUtf: (utf) => {
+    decodeURIComponent(escape(s))
   }
 }
