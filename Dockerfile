@@ -1,5 +1,5 @@
 # Node latest stable version
-FROM node
+FROM node:8
 
 # Set working directory in container
 WORKDIR /msweather

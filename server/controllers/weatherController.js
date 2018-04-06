@@ -8,6 +8,9 @@ let weatherController = {
   renderIndex: (req, res, next) => {
     return res.status(200).send({ status: 'OK' })
   },
+  healthCheck: (req, res, next) => {
+    return res.status(200).send({ status: 'OK', version: '1.0' });
+  },
   getFiveDaysWeather: (req, res, next) => {
     const url = `${config.weather_api_url}forecast?q=London&${process.env.WEATHER_API_KEY}`
     fetch(url)
