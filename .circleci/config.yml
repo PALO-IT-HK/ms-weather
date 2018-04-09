@@ -45,7 +45,7 @@ jobs:
                     }
                   ],
                   "cpu": 0,
-                  "memoryReservation": 128,
+                  "memoryReservation": 256,
                   "environment" : [
                       { "name" : "NODE_ENV", "value" : "develop" }
                   ]
