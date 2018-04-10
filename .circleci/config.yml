@@ -24,7 +24,7 @@ jobs:
               FAMILY='ms-weather'
               DOCKER_IMAGE='ms-weather'
               TASK='ms-weather'
-              SERVICE='ms-weather'
+              SERVICE='svc-weather'
               # Login to AWS
               aws configure set region $AWS_REGION
               $(aws ecr get-login)
