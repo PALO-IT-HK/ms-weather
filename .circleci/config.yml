@@ -4,6 +4,8 @@ jobs:
     working_directory: /app
     docker:
       - image: docker:17.03.0-ce-git
+    environment:
+      - ENDPOINT_BASEINTERFACE: api.ci.palo-it-hk.com
     steps:
       - checkout
       - setup_remote_docker
@@ -32,29 +34,7 @@ jobs:
               docker tag app $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$CIRCLE_SHA1
               docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$CIRCLE_SHA1
               # Create task for docker deploy
-<<<<<<< HEAD
               task_template=$(cat .ecs-task-definition.json)
-=======
-              task_template='[
-                {
-                  "name": "%s",
-                  "image": "%s.dkr.ecr.%s.amazonaws.com/%s:%s",
-                  "essential": true,
-                  "portMappings": [
-                    {
-                      "containerPort": 3000,
-                      "hostPort": 0,
-                      "protocol": "tcp"
-                    }
-                  ],
-                  "cpu": 0,
-                  "memoryReservation": 256,
-                  "environment" : [
-                      { "name" : "NODE_ENV", "value" : "production" }
-                  ]
-                }
-              ]'
->>>>>>> f714649419ac042e64bbcbeeb0aa86775bd3e0aa
               echo "$task_template"
               task_def=$(printf "$task_template" $TASK $AWS_ACCOUNT_ID $AWS_REGION $TASK $CIRCLE_SHA1 $ENDPOINT_BASEINTERFACE $WEATHER_API_KEY)
               echo "$task_def"
