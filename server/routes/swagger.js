@@ -20,7 +20,7 @@ const options = {
       }
     ],
     schemes: ['https'],
-    host: `https://${config.endpointBaseUrl}`,
+    host: `${config.endpointBaseUrl}`,
     basePath: '/weather'
   },
   apis: [
