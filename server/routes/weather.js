@@ -11,8 +11,8 @@ router.use('/docs', swagger.router);
 
 /**
  * @swagger
- * /weather/current:
- *  get:
+ * /current:
+ *   get:
  *     description: Get Current Weather
  *     tags:
  *       - weather
@@ -21,15 +21,13 @@ router.use('/docs', swagger.router);
  *     responses:
  *       200:
  *         description: results
- *         schema:
- *           $ref: '#/definitions/results'
  */
 router.get('/current', weatherController.getFiveDaysWeather);
 
 /**
  * @swagger
- * /weather/vialatlon/{lat}/{lon}:
- *  get:
+ * /vialatlon/{lat}/{lon}:
+ *   get:
  *     description: Get Weather By Geolocation
  *     tags:
  *       - weather
@@ -38,15 +36,13 @@ router.get('/current', weatherController.getFiveDaysWeather);
  *     responses:
  *       200:
  *         description: results
- *         schema:
- *           $ref: '#/definitions/results'
  */
 router.get('/vialatlon/:lat/:lon', weatherController.getFiveDaysWeatherViaLatLong);
 
 /**
  * @swagger
- * /weather/history/{startDate}/{endDate}:
- *  get:
+ * /history/{startDate}/{endDate}:
+ *   get:
  *     description: Get Weather History Data By Date Range
  *     tags:
  *       - weather
@@ -71,8 +67,8 @@ router.get('/history/:startDate/:endDate', historyController.getHistory);
 
 /**
  * @swagger
- * /weather/history/{startDate}/{endDate}/{startHour}/{endHour}:
- *  get:
+ * /history/{startDate}/{endDate}/{startHour}/{endHour}:
+ *   get:
  *     description: Get Weather History Data By Date Range and Time Range
  *     tags:
  *       - weather

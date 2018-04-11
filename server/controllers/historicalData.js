@@ -12,9 +12,9 @@ const awsConfig = {
   region: config.awsRegion,
 };
 
-const client = athena.createClient(clientConfig, awsConfig)
-
 function getHistoryFromAthena({startDate, endDate, startTime, endTime}) {
+  const client = athena.createClient(clientConfig, awsConfig)
+
   const query = `SELECT ob_time AS time, avg(air_temperature) AS air_temperature, avg(prcp_amt) AS prcp_amt`
     + ` FROM ${config.athenaDb}.weather_midas_data`
     + ` WHERE ob_time BETWEEN from_iso8601_timestamp('${startDate.toISOString()}')`
@@ -30,6 +30,7 @@ function getHistoryFromAthena({startDate, endDate, startTime, endTime}) {
     startTime: startTime,
     endTime: endTime,
   });
+  
   return client.execute(query).toPromise();
 }
 
@@ -81,6 +82,7 @@ function getHistoryWithTimeRange (req, res, next) {
 };
 
 module.exports = {
+  getHistoryFromAthena,
   getHistory,
   getHistoryWithTimeRange,
 };

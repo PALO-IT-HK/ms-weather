@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const config = require('../config');
+
 const options = {
   swaggerDefinition: {
     info: {
@@ -17,9 +19,9 @@ const options = {
         description: 'Weather Data API'
       }
     ],
-    schemes: ['http'],
-    host: 'localhost:3000',
-    basePath: '/'
+    schemes: ['https'],
+    host: `https://${config.endpointBaseUrl}`,
+    basePath: '/weather'
   },
   apis: [
     './server/routes/weather.js'
