@@ -70,6 +70,9 @@ workflows:
             tags:
               only: /.*/
       - build_and_deploy:
+          requires:
+            - unit_test
+          filters:
             branches:
               only:
                 - develop
