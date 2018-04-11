@@ -37,7 +37,10 @@ router.get('/current', weatherController.getFiveDaysWeather);
  *       200:
  *         description: results
  */
-router.get('/vialatlon/:lat/:lon', weatherController.getFiveDaysWeatherViaLatLong);
+router.get(
+  '/vialatlon/:lat/:lon',
+  weatherController.getFiveDaysWeatherViaLatLong
+);
 
 /**
  * @swagger
@@ -99,6 +102,9 @@ router.get('/history/:startDate/:endDate', historyController.getHistory);
  *       200:
  *         description: results
  */
-router.get('/history/:startDate/:endDate/:startHour/:endHour', historyController.getHistoryWithTimeRange);
+router.get(
+  '/history/:startDate/:endDate/:startHour/:endHour',
+  historyController.getHistoryWithTimeRange
+);
 
 module.exports = router;
