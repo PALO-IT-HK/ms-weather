@@ -1,10 +1,14 @@
 const moment = require('moment');
 
-const getHistoryFromAthena = require('../utils/athena').getHistoryFromAthena;
+const { getHistoryFromAthena } = require('../utils/athena');
 const weatherUtils = require('../utils/weather');
 
-function getWeatherHistory({ startDate, endDate, startTime, endTime }) {
-  return getHistoryFromAthena({ startDate, endDate, startTime, endTime })
+function getWeatherHistory({
+  startDate, endDate, startTime, endTime,
+}) {
+  return getHistoryFromAthena({
+    startDate, endDate, startTime, endTime,
+  })
     .then((data) => {
       const weatherData = weatherUtils.transformWeatherHistory(data.records);
       const aggregatedData = weatherUtils.aggregateStatistics(weatherData);
@@ -15,14 +19,16 @@ function getWeatherHistory({ startDate, endDate, startTime, endTime }) {
     });
 }
 
-function getHistory (req, res, next) {
+function getHistory(req, res, next) {
   // Start Date
   const startDate = moment(`${req.params.startDate}T000000Z`).toISOString();
   const endDate = moment(`${req.params.endDate}T235959Z`).toISOString();
   const startTime = '00.00';
   const endTime = '23.59';
 
-  return getWeatherHistory({startDate, endDate, startTime, endTime})
+  return getWeatherHistory({
+    startDate, endDate, startTime, endTime,
+  })
     .then(({ weatherData, aggregatedData }) => {
       res.status(200).send({
         status: 'ok',
@@ -32,14 +38,11 @@ function getHistory (req, res, next) {
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).json({
-        status: 'internal server error',
-        params: req.params,
-      });
+      next(err);
     });
-};
+}
 
-function getHistoryWithTimeRange (req, res, next) {
+function getHistoryWithTimeRange(req, res, next) {
   const startDate = moment(`${req.params.startDate}T000000Z`).toISOString();
   const endDate = moment(`${req.params.endDate}T235959Z`).toISOString();
 
@@ -47,7 +50,9 @@ function getHistoryWithTimeRange (req, res, next) {
   const startTime = `${req.params.startHour.substr(0, 2)}.00`;
   const endTime = `${req.params.endHour.substr(0, 2)}.59`;
 
-  return getWeatherHistory({ startDate, endDate, startTime, endTime })
+  return getWeatherHistory({
+    startDate, endDate, startTime, endTime,
+  })
     .then(({ weatherData, aggregatedData }) => {
       res.status(200).send({
         status: 'ok',
@@ -57,12 +62,9 @@ function getHistoryWithTimeRange (req, res, next) {
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).json({
-        status: 'internal server error',
-        params: req.params,
-      });
+      next(err);
     });
-};
+}
 
 module.exports = {
   getHistory,

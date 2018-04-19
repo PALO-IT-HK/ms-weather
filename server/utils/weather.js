@@ -21,20 +21,20 @@ function aggregateStatistics(records) {
       {
         air_temperature: hourlyRecord.air_temperature,
         prcp_amt: hourlyRecord.prcp_amt,
-      }
-    ]
+      },
+    ],
   }), {});
 
   return Object.keys(groupByDate).reduce((accum, date) => ({
     ...accum,
     [date]: {
       avg_air_temperature: groupByDate[date].reduce(
-        (sum, hourlyRecord) => sum + hourlyRecord.air_temperature, 
-        0
+        (sum, hourlyRecord) => sum + hourlyRecord.air_temperature,
+        0,
       ) / groupByDate[date].length,
       total_prcp_amt: groupByDate[date].reduce(
-        (sum, hourlyRecord) => sum + hourlyRecord.prcp_amt, 
-        0
+        (sum, hourlyRecord) => sum + hourlyRecord.prcp_amt,
+        0,
       ),
     },
   }), {});

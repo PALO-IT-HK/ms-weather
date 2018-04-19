@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const swagger = require('./swagger');
 const weatherController = require('../controllers/weatherController');
@@ -39,7 +40,7 @@ router.get('/current', weatherController.getFiveDaysWeather);
  */
 router.get(
   '/vialatlon/:lat/:lon',
-  weatherController.getFiveDaysWeatherViaLatLong
+  weatherController.getFiveDaysWeatherViaLatLong,
 );
 
 /**
@@ -104,7 +105,7 @@ router.get('/history/:startDate/:endDate', historyController.getHistory);
  */
 router.get(
   '/history/:startDate/:endDate/:startHour/:endHour',
-  historyController.getHistoryWithTimeRange
+  historyController.getHistoryWithTimeRange,
 );
 
 module.exports = router;
